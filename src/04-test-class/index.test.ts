@@ -67,13 +67,13 @@ describe('BankAccount', () => {
   });
 
   test('should set new balance if fetchBalance returned number', async () => {
-    bankAccount.fetchBalance = jest.fn().mockResolvedValue(balance);
+    jest.spyOn(_, 'random').mockImplementation(() => balance);
     await bankAccount.synchronizeBalance();
     expect(bankAccount.getBalance()).toBe(balance);
   });
 
   test('should throw SynchronizationFailedError if fetchBalance returned null', async () => {
-    bankAccount.fetchBalance = jest.fn().mockResolvedValue(null);
+    jest.spyOn(_, 'random').mockImplementation(() => 0);
     await expect(bankAccount.synchronizeBalance()).rejects.toThrow(
       SynchronizationFailedError,
     );
