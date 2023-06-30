@@ -16,13 +16,17 @@ describe('doStuffByTimeout', () => {
 
   test('should set timeout with provided callback and timeout', () => {
     const callbackFn = jest.fn();
+
     jest.spyOn(global, 'setTimeout');
+
     doStuffByTimeout(callbackFn, timeout);
+
     expect(setTimeout).toHaveBeenCalledWith(callbackFn, timeout);
   });
 
   test('should call callback only after timeout', () => {
     const callbackFn = jest.fn();
+
     doStuffByTimeout(callbackFn, timeout);
     expect(callbackFn).not.toBeCalled();
 
@@ -47,6 +51,7 @@ describe('doStuffByInterval', () => {
 
   test('should set interval with provided callback and timeout', () => {
     const callbackFn = jest.fn();
+
     jest.spyOn(global, 'setInterval');
     doStuffByInterval(callbackFn, interval);
     expect(setInterval).toHaveBeenCalledWith(callbackFn, interval);
@@ -55,6 +60,7 @@ describe('doStuffByInterval', () => {
   test('should call callback multiple times after multiple intervals', () => {
     const callbackFn = jest.fn();
     const quantity = 3;
+
     doStuffByInterval(callbackFn, interval);
     expect(callbackFn).not.toHaveBeenCalled();
 
@@ -84,6 +90,7 @@ describe('readFileAsynchronously', () => {
 
   test('should return file content if file exists', async () => {
     const fileContent = 'Hello, RSSchool student';
+
     jest.spyOn(fs, 'existsSync').mockReturnValue(true);
     jest.spyOn(fsPromises, 'readFile').mockResolvedValue(fileContent);
 
